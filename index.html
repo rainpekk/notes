@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 0;
+      color: #111827;
+    }
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    .pdf-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .pdf-item {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .pdf-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .pdf-item h3 {
+      margin-bottom: 10px;
+    }
+    .pdf-item a {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 15px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      color: white;
+      background: #2563eb;
+      transition: background 0.2s;
+    }
+    .pdf-item a.download {
+      background: #059669;
+    }
+    .pdf-item a:hover {
+      background: #1e40af;
+    }
+    .pdf-item a.download:hover {
+      background: #047857;
+    }
+    iframe {
+      width: 100%;
+      height: 85vh;
+      border: none;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    #viewer {
+      display: none;
+    }
+    footer {
+      text-align: center;
+      margin: 30px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>课堂笔记</header>
+
+  <main>
+    <div class="pdf-list" id="pdfList"></div>
+
+    <div id="viewer">
+      <h2 id="pdfTitle"></h2>
+      <iframe id="pdfFrame"></iframe>
+      <div>
+        <a href="#" id="downloadLink" class="pdf-item a download">Download</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 My GitHub Pages | <a href="https://github.com/rainpekk/notes" target="_blank">GitHub 仓库</a>
+  </footer>
+
+  <script>
+    const pdfFiles = [
+      { name: "数学分析(III)", file: "pdfs/数学分析(III).pdf" },
+      { name: "抽象代数", file: "pdfs/抽象代数.pdf" },
+      { name: "复变函数", file: "pdfs/复变函数.pdf" },
+      { name: "实变函数", file: "pdfs/实变函数.pdf" }
+      { name: "普通物理(II)", file: "pdfs/普通物理(II).pdf" }
+    ];
+
+    const listContainer = document.getElementById("pdfList");
+    const viewer = document.getElementById("viewer");
+    const frame = document.getElementById("pdfFrame");
+    const title = document.getElementById("pdfTitle");
+    const download = document.getElementById("downloadLink");
+
+    pdfFiles.forEach(pdf => {
+      const div = document.createElement("div");
+      div.className = "pdf-item";
+      div.innerHTML = `
+        <h3>${pdf.name}</h3>
+        <a href="#" onclick="openPDF('${pdf.file}', '${pdf.name}'); return false;">Preview Online</a>
+        <a href="${pdf.file}" download class="download">Download</a>
+      `;
+      listContainer.appendChild(div);
+    });
+
+    function openPDF(file, name) {
+      frame.src = file;
+      title.textContent = name;
+      download.href = file;
+      viewer.style.display = "block";
+      window.scrollTo({ top: viewer.offsetTop, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
