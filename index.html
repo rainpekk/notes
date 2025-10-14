@@ -65,16 +65,6 @@
     .pdf-item a.download:hover {
       background: #047857;
     }
-    iframe {
-      width: 100%;
-      height: 85vh;
-      border: none;
-      border-radius: 12px;
-      margin-top: 20px;
-    }
-    #viewer {
-      display: none;
-    }
     footer {
       text-align: center;
       margin: 30px;
@@ -88,54 +78,34 @@
 
   <main>
     <div class="pdf-list" id="pdfList"></div>
-
-    <div id="viewer">
-      <h2 id="pdfTitle"></h2>
-      <iframe id="pdfFrame"></iframe>
-      <div>
-        <a href="#" id="downloadLink" class="download">📥 下载此文件</a>
-      </div>
-    </div>
   </main>
 
   <footer>
-    © 2025 My GitHub Pages | <a href="https://github.com/rainpekk/notes" target="_blank">GitHub 仓库</a>
+    © 2025 My GitHub Pages | 
+    <a href="https://github.com/rainpekk/notes" target="_blank">GitHub 仓库</a>
   </footer>
 
   <script>
     const pdfFiles = [
-      { name: "数学分析(III)", file: "pdfs/数学分析(III).pdf" },
-      { name: "抽象代数", file: "pdfs/抽象代数.pdf" },
-      { name: "复变函数", file: "pdfs/复变函数.pdf" },
-      { name: "实变函数", file: "pdfs/实变函数.pdf" },
-      { name: "普通物理(II)", file: "pdfs/普通物理(II).pdf" }
+      { name: "数学分析(III)", file: "pdfs/math3.pdf" },
+      { name: "抽象代数", file: "pdfs/algebra.pdf" },
+      { name: "复变函数", file: "pdfs/complex.pdf" },
+      { name: "实变函数", file: "pdfs/real.pdf" },
+      { name: "普通物理(II)", file: "pdfs/physics2.pdf" }
     ];
 
     const listContainer = document.getElementById("pdfList");
-    const viewer = document.getElementById("viewer");
-    const frame = document.getElementById("pdfFrame");
-    const title = document.getElementById("pdfTitle");
-    const download = document.getElementById("downloadLink");
 
-    // 生成文件列表
     pdfFiles.forEach(pdf => {
       const div = document.createElement("div");
       div.className = "pdf-item";
       div.innerHTML = `
         <h3>${pdf.name}</h3>
-        <a href="#" onclick="openPDF('${pdf.file}', '${pdf.name}'); return false;">👁️ 在线预览</a>
+        <a href="viewer.html?file=${encodeURIComponent(pdf.file)}&name=${encodeURIComponent(pdf.name)}" target="_blank">👁️ 在线预览</a>
         <a href="${pdf.file}" download class="download">📥 下载</a>
       `;
       listContainer.appendChild(div);
     });
-
-    function openPDF(file, name) {
-      frame.src = file;
-      title.textContent = name;
-      download.href = file;
-      viewer.style.display = "block";
-      window.scrollTo({ top: viewer.offsetTop, behavior: "smooth" });
-    }
   </script>
 </body>
 </html>
