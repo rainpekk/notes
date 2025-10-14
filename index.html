@@ -87,11 +87,11 @@
 
   <script>
     const pdfFiles = [
-      { name: "数学分析(III)", file: "pdfs/math3.pdf" },
-      { name: "抽象代数", file: "pdfs/algebra.pdf" },
-      { name: "复变函数", file: "pdfs/complex.pdf" },
-      { name: "实变函数", file: "pdfs/real.pdf" },
-      { name: "普通物理(II)", file: "pdfs/physics2.pdf" }
+      { name: "数学分析(III)", file: "pdfs/数学分析(III).pdf" },
+      { name: "抽象代数", file: "pdfs/抽象代数.pdf" },
+      { name: "复变函数", file: "pdfs/复变函数.pdf" },
+      { name: "实变函数", file: "pdfs/实变函数.pdf" },
+      { name: "普通物理(II)", file: "pdfs/普通物理(II).pdf" }
     ];
 
     const listContainer = document.getElementById("pdfList");
@@ -101,8 +101,8 @@
       div.className = "pdf-item";
       div.innerHTML = `
         <h3>${pdf.name}</h3>
-        <a href="viewer.html?file=${encodeURIComponent(pdf.file)}&name=${encodeURIComponent(pdf.name)}" target="_blank">👁️ 在线预览</a>
-        <a href="${pdf.file}" download class="download">📥 下载</a>
+        <a href="viewer.html?file=${encodeURIComponent(pdf.file)}&name=${encodeURIComponent(pdf.name)}" target="_blank">Preview</a>
+        <a href="${pdf.file}" download class="download">Download</a>
       `;
       listContainer.appendChild(div);
     });
